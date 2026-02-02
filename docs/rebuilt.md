@@ -18,9 +18,9 @@ Logger.recordOutput("FieldSimulation/Fuel",
 
 And display the data in AdvantageScope:
 
-![](./media/reefscape%20coral%20algae%20ascope.png)
+![](media/rebuilt_fuel_ascope.png)
 
-![Reefscape Game Pieces](./media/reefscape%20game%20pieces.gif)
+![Rebuilt Game Pieces](media/rebuilt_game_pieces.gif)
 
 !!! abstract "Detailed Documents on Game Pieces Simulation"
 **[:octicons-arrow-right-24: Adding Game Pieces to the Field](https://shenzhen-robotics-alliance.github.io/maple-sim/using-the-simulated-arena/#3-adding-game-pieces-to-the-field)**
@@ -43,8 +43,8 @@ this.intakeSimulation = IntakeSimulation.OverTheBumperIntake(
         Meters.of(0.2),
         // The intake is mounted on the back side of the chassis
         IntakeSimulation.IntakeSide.BACK,
-        // The intake can hold up to 1 note
-        1);
+        // The intake can hold up to 20 fuel
+        20);
 ```
 
 !!! abstract "Detailed Documents on IntakeSimulation"
@@ -62,12 +62,12 @@ RebuiltFuelOnFly.setHitTargetCallBack(() -> System.out.println("FUEL hits HUB!")
 SimulatedArena.getInstance()
     .addGamePieceProjectile(new RebuiltFuelOnFly(
         driveSimulation.getSimulatedDriveTrainPose().getTranslation(),
-        new Translation2d(),
+        new Translation2d(), // shooter offet from center
         driveSimulation.getDriveTrainSimulatedChassisSpeedsFieldRelative(),
         driveSimulation.getSimulatedDriveTrainPose().getRotation(),
-        0.4, // initial height of the ball, in meters
-        9, // initial velocity, in m/s
-        Math.toRadians(70)) // shooter angle
+        Units.Meters.of(0.4), // initial height of the ball, in meters
+        Units.MetersPerSecond.of(8), // initial velocity, in m/s
+        Units.Degrees.of(60)) // shooter angle
         .withProjectileTrajectoryDisplayCallBack(
             (poses) -> Logger.recordOutput("successfulShotsTrajectory", poses.toArray(Pose3d[]::new)),
             (poses) -> Logger.recordOutput("missedShotsTrajectory", poses.toArray(Pose3d[]::new))));
@@ -75,4 +75,4 @@ SimulatedArena.getInstance()
 
 See [Simulating Projectiles](./simulating-projectiles.md).
 
-![](./media/launching%20algae.gif)
+![Rebuilt fuel launching](media/rebuilt_fuel_launching.gif)
