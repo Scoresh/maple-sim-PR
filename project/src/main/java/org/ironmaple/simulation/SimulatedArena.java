@@ -554,7 +554,6 @@ public abstract class SimulatedArena {
             if (resetFieldSubscriber.get()) {
                 SimulatedArena.getInstance().resetFieldForAuto();
                 resetFieldPublisher.set(false);
-                matchClock.reset();
             }
         }
     }
