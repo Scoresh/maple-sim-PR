@@ -15,6 +15,7 @@ import edu.wpi.first.units.measure.Time;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.*;
@@ -64,8 +65,7 @@ public abstract class SimulatedArena {
 
     protected int redScore = 0;
     protected int blueScore = 0;
-    protected double matchClock = 0;
-    protected double lastMeasuredTimestamp=System.currentTimeMillis();
+    protected Timer matchClock = new Timer();
 
     public Map<String, Double> redScoringBreakdown = new Hashtable<String, Double>();
     public Map<String, Double> blueScoringBreakdown = new Hashtable<String, Double>();
@@ -242,6 +242,7 @@ public abstract class SimulatedArena {
         setupValueForMatchBreakdown("TeleopScore");
         setupValueForMatchBreakdown("Auto/AutoScore");
         resetFieldPublisher.set(false);
+        matchClock.start();
     }
 
     /**
@@ -548,14 +549,12 @@ public abstract class SimulatedArena {
             // move through a few sub-periods in each update
             for (int i = 0; i < SIMULATION_SUB_TICKS_IN_1_PERIOD; i++) simulationSubTick(i);
 
-            matchClock += (System.currentTimeMillis() - lastMeasuredTimestamp)/1000.0;
-            lastMeasuredTimestamp = System.currentTimeMillis();
             SmartDashboard.putNumber("MapleArenaSimulation/Dyn4jEngineCPUTimeMS", (System.nanoTime() - t0) / 1000000.0);
 
             if (resetFieldSubscriber.get()) {
                 SimulatedArena.getInstance().resetFieldForAuto();
                 resetFieldPublisher.set(false);
-                matchClock = 0;
+                matchClock.reset();
             }
         }
     }
@@ -592,7 +591,7 @@ public abstract class SimulatedArena {
 
         if (shouldPublishMatchBreakdown) {
             publishBreakdown();
-            matchClockPublisher.set(matchClock);
+            matchClockPublisher.set(matchClock.get());
         }
     }
 
@@ -697,7 +696,7 @@ public abstract class SimulatedArena {
      */
     public synchronized void resetFieldForAuto() {
         clearGamePieces();
-        matchClock = 0;
+        matchClock.reset();
         placeGamePiecesOnField();
     }
 
