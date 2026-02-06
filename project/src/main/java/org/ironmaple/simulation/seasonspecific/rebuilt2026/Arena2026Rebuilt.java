@@ -331,11 +331,11 @@ public class Arena2026Rebuilt extends SimulatedArena {
     public void simulationSubTick(int tickNum) {
         if (shouldClock && !DriverStation.isAutonomous() && DriverStation.isEnabled()) {
 
-            if (matchClock >= nextClockSwapTime) {
-                nextClockSwapTime = matchClock + 25;
+            if (matchClock.get() >= nextClockSwapTime) {
+                nextClockSwapTime = matchClock.get() + 25;
                 blueIsOnClock = !blueIsOnClock;
             }
-            phaseClockPublisher.set((nextClockSwapTime-matchClock));
+            phaseClockPublisher.set((nextClockSwapTime-matchClock.get()));
 
 
         } else {
