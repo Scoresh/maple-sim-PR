@@ -89,6 +89,6 @@ nav:
     - Simulating Intake: simulating-intake.md
     - Simulating Opponent Robots: simulating-opponent-robots.md
     - Simulating Projectiles: simulating-projectiles.md
-    - Reefscape Simulation: reefscape.md 
+    - Rebuilt Simulation: rebuilt.md
     - Contributing: CONTRIBUTION.md
     - Release Notes: ./release-notes/version0.3.0-beta2.md
