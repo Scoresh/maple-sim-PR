@@ -12,6 +12,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.networktables.BooleanPublisher;
 import edu.wpi.first.networktables.DoublePublisher;
+import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.units.measure.LinearVelocity;
@@ -25,7 +26,7 @@ public class Arena2026Rebuilt extends SimulatedArena {
 
     protected boolean shouldClock = true;
 
-    protected double nextClockSwapTime = 0;
+    protected double nextClockSwapTime=0;
     protected boolean blueIsOnClock = Math.random() < 0.5;
 
     protected DoublePublisher phaseClockPublisher =
@@ -43,6 +44,8 @@ public class Arena2026Rebuilt extends SimulatedArena {
     protected RebuiltOutpost redOutpost;
 
     protected boolean isInEfficiencyMode = true;
+
+
 
     protected static Translation2d centerPieceBottomRightCorner = new Translation2d(7.35737, 1.724406);
     protected static Translation2d redDepotBottomRightCorner = new Translation2d(0.02, 5.53);
@@ -332,12 +335,14 @@ public class Arena2026Rebuilt extends SimulatedArena {
                 nextClockSwapTime = matchClock.get() + 25;
                 blueIsOnClock = !blueIsOnClock;
             }
-            phaseClockPublisher.set((nextClockSwapTime - matchClock.get()));
+            phaseClockPublisher.set((nextClockSwapTime-matchClock.get()));
+
 
         } else {
             phaseClockPublisher.set((25));
         }
 
+        
         super.simulationSubTick(tickNum);
 
         blueActivePublisher.set(isActive(true));
