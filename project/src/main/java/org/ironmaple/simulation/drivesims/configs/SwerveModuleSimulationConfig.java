@@ -53,7 +53,7 @@ public class SwerveModuleSimulationConfig implements Supplier<SwerveModuleSimula
         BoundingCheck.check(wheelRadius.in(Inches), 1, 3.2, "drive wheel radius", "inches");
         BoundingCheck.check(
                 steerRotationalInertia.in(KilogramSquareMeters), 0.005, 0.06, "steer rotation inertia", "kg * m^2");
-        BoundingCheck.check(wheelsCoefficientOfFriction, 0.6, 1.9, "tire coefficient of friction", "");
+        BoundingCheck.check(wheelsCoefficientOfFriction, 0.6, 2.5, "tire coefficient of friction", "");
 
         this.driveMotorConfigs =
                 new SimMotorConfigs(driveMotorModel, driveGearRatio, KilogramSquareMeters.zero(), driveFrictionVoltage);
