@@ -373,7 +373,7 @@ public class Arena2026Rebuilt extends SimulatedArena {
      *
      * <h2>Used to determine whether the arena should time which goal is active. </h2>
      *
-     * When this is set to false, both goals will always be set to active. Thus can be useful for testing or to simulate
+     * When this is set to false, both goals will always be set to active. This can be useful for testing or to simulate
      * endgame.
      *
      * @param shouldRunClock
