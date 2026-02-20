@@ -49,7 +49,7 @@ public class RebuiltOutpost extends Goal {
      * <h2>Creates an outpost of the specified color.</h2>
      *
      * @param arena The host arena of this outpost.
-     * @param isBlue Wether this is the blue outpost or the red one.
+     * @param isBlue Whether this is the blue outpost or the red one.
      */
     public RebuiltOutpost(Arena2026Rebuilt arena, boolean isBlue) {
         super(
